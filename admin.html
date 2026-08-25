@@ -1,0 +1,4 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Royal Grand Admin</title><link rel="stylesheet" href="style.css"></head><body><div class="container"><h1>Royal Grand Admin</h1><p>Admin APIs are available at <code>/api/admin/*</code>. Use your admin account to authenticate.</p><div id="out" class="form-card">Loading...</div></div><script>
+async function api(p,o={}){const r=await fetch(p,{credentials:"include",headers:{"Content-Type":"application/json"},...o});const d=await r.json();if(!r.ok)throw Error(d.error||"Failed");return d}
+(async()=>{try{const s=await api("/api/admin/summary");document.getElementById("out").innerHTML="<h2>Dashboard</h2><pre>"+JSON.stringify(s,null,2)+"</pre><p>Use the website dashboard for guest-facing records. Admin data is protected by admin authentication.</p>"}catch(e){document.getElementById("out").textContent=e.message}})();
+</script></body></html>

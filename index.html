@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Royal Grand Hotel - Rooms, dining, services and bookings">
+  <title>Royal Grand Hotel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="toast"></div>
+
+<div id="authView" class="auth-view">
+  <div class="auth-card">
+    <div class="brand-mark">RG</div>
+    <h1>Royal Grand Hotel</h1>
+    <p class="muted">Luxury stay, dining & guest services</p>
+
+    <div class="tabs">
+      <button class="tab active" data-auth-tab="login">Login</button>
+      <button class="tab" data-auth-tab="register">Register</button>
+      <button class="tab" data-auth-tab="guest">Guest Login</button>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <input id="loginEmail" type="email" placeholder="Email" required>
+      <input id="loginPassword" type="password" placeholder="Password" required>
+      <button class="primary" type="submit">Login</button>
+    </form>
+
+    <form id="registerForm" class="auth-form hidden">
+      <input id="registerName" placeholder="Full name" required>
+      <input id="registerEmail" type="email" placeholder="Email" required>
+      <input id="registerPhone" placeholder="Phone number" required>
+      <input id="registerPassword" type="password" minlength="6" placeholder="Password (6+ characters)" required>
+      <button class="primary" type="submit">Create Account</button>
+    </form>
+
+    <div id="guestForm" class="auth-form hidden">
+      <p>Continue without creating an account. You can browse rooms, food and services.</p>
+      <button id="guestBtn" class="primary" type="button">Continue as Guest</button>
+    </div>
+  </div>
+</div>
+
+<div id="appView" class="hidden">
+<header class="topbar">
+  <button id="menuBtn" class="icon-btn" aria-label="Menu">☰</button>
+  <a class="logo" href="#home" data-section="home">Royal Grand</a>
+  <nav id="nav">
+    <button data-section="home">Home</button>
+    <button data-section="rooms">Rooms</button>
+    <button data-section="food">Food</button>
+    <button data-section="services">Services</button>
+    <button data-section="facilities">Facilities</button>
+    <button data-section="gallery">Gallery</button>
+    <button data-section="reviews">Reviews</button>
+    <button data-section="maps">Maps</button>
+    <button data-section="dashboard">Dashboard</button>
+    <button id="logoutBtn" class="danger">Logout</button>
+  </nav>
+  <div class="top-actions">
+    <a class="call" href="tel:+917894410792">📞</a>
+    <button id="cartBtn" class="cart-button">🛒 <span id="cartCount">0</span></button>
+  </div>
+</header>
+
+<main>
+<section id="home" class="page-section hero section-bg-home">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <span class="eyebrow">WELCOME TO ROYAL GRAND</span>
+    <h2>A memorable stay, dining & service experience.</h2>
+    <p>56 rooms, all-day dining, guest services and direct support from one place.</p>
+    <div class="hero-buttons">
+      <button class="primary" data-section="rooms">Book a Room</button>
+      <button class="secondary" data-section="food">Order Food</button>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="home-only section-bg-about">
+  <div class="container narrow">
+    <span class="eyebrow">ABOUT</span>
+    <h2>Royal Grand Hotel</h2>
+    <p>Designed for comfortable stays, business travel, family visits and celebrations. Explore rooms, dining, facilities and guest services from one responsive website.</p>
+    <div class="stats">
+      <div><strong>56</strong><span>Rooms</span></div>
+      <div><strong>400</strong><span>Food Items</span></div>
+      <div><strong>24/7</strong><span>Guest Support</span></div>
+      <div><strong>8+</strong><span>Services</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="homeReviews" class="home-only section-bg-reviews">
+  <div class="container">
+    <span class="eyebrow">GUEST REVIEWS</span>
+    <h2>What guests say</h2>
+    <div id="homeReviewGrid" class="review-grid"></div>
+    <button class="secondary" data-section="reviews">View all reviews</button>
+  </div>
+</section>
+
+<section id="rooms" class="page-section hidden section-bg-rooms">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow">STAY</span><h2>Rooms & Suites</h2></div></div>
+    <div class="filters">
+      <input id="roomSearch" placeholder="Search rooms...">
+      <select id="roomType"><option value="">All types</option><option>Deluxe</option><option>Executive</option><option>Suite</option><option>Family</option><option>Presidential</option></select>
+      <input id="checkIn" type="date">
+      <input id="checkOut" type="date">
+    </div>
+    <div id="roomGrid" class="card-grid"></div>
+  </div>
+</section>
+
+<section id="booking" class="page-section hidden section-bg-booking">
+  <div class="container narrow">
+    <button class="back-btn" data-section="rooms">← Back to rooms</button>
+    <h2>Room Booking</h2>
+    <form id="bookingForm" class="form-card">
+      <input id="bookingRoomId" type="hidden">
+      <div class="two"><input id="guestName" placeholder="Guest name" required><input id="guestPhone" placeholder="Phone" required></div>
+      <div class="two"><input id="bookingEmail" type="email" placeholder="Email" required><input id="guestCount" type="number" min="1" max="10" value="1" placeholder="Guests" required></div>
+      <div class="two"><label>Check-in<input id="bookingCheckIn" type="date" required></label><label>Check-out<input id="bookingCheckOut" type="date" required></label></div>
+      <textarea id="bookingNotes" placeholder="Special requests"></textarea>
+      <div id="bookingSummary" class="summary"></div>
+      <button class="primary" type="submit">Continue to Payment</button>
+    </form>
+  </div>
+</section>
+
+<section id="payment" class="page-section hidden section-bg-payment">
+  <div class="container narrow">
+    <h2>Payment</h2>
+    <div class="notice">Demo payment section. No real card details are stored. Connect your preferred PCI-compliant gateway before accepting live payments.</div>
+    <form id="paymentForm" class="form-card">
+      <div class="payment-methods">
+        <label><input type="radio" name="pay" value="upi" checked> UPI</label>
+        <label><input type="radio" name="pay" value="card"> Card</label>
+        <label><input type="radio" name="pay" value="cash"> Pay at Hotel</label>
+      </div>
+      <div id="paymentExtra"></div>
+      <div id="paymentSummary" class="summary"></div>
+      <button class="primary" type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</section>
+
+<section id="food" class="page-section hidden section-bg-food">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow">DINING</span><h2>Food Delivery</h2></div><button id="openCart" class="secondary">Open Cart</button></div>
+    <div class="filters"><input id="foodSearch" placeholder="Search food..."><select id="foodCategory"><option value="">All categories</option><option>Breakfast</option><option>Indian</option><option>Chinese</option><option>Continental</option><option>Pizza</option><option>Burger</option><option>Biryani</option><option>Dessert</option><option>Beverage</option><option>Snacks</option></select></div>
+    <div id="foodGrid" class="card-grid"></div>
+  </div>
+</section>
+
+<section id="cart" class="page-section hidden section-bg-cart">
+  <div class="container narrow">
+    <h2>Your Food Cart</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+    <form id="foodOrderForm" class="form-card">
+      <input id="orderName" placeholder="Name" required>
+      <input id="orderPhone" placeholder="Phone" required>
+      <input id="orderRoom" placeholder="Room number (if staying)">
+      <textarea id="orderNotes" placeholder="Delivery notes"></textarea>
+      <button class="primary" type="submit">Place Food Order</button>
+    </form>
+  </div>
+</section>
+
+<section id="services" class="page-section hidden section-bg-services">
+  <div class="container">
+    <span class="eyebrow">GUEST SERVICES</span><h2>Request a Service</h2>
+    <div id="serviceGrid" class="service-grid"></div>
+  </div>
+</section>
+
+<section id="facilities" class="page-section hidden section-bg-facilities">
+  <div class="container"><span class="eyebrow">FACILITIES</span><h2>Hotel Facilities</h2><div class="facility-grid" id="facilityGrid"></div></div>
+</section>
+
+<section id="gallery" class="page-section hidden section-bg-gallery">
+  <div class="container"><span class="eyebrow">GALLERY</span><h2>Hotel Gallery</h2><div class="gallery-grid" id="galleryGrid"></div></div>
+</section>
+
+<section id="reviews" class="page-section hidden section-bg-reviews">
+  <div class="container"><span class="eyebrow">REVIEWS</span><h2>Guest Reviews</h2><div id="reviewGrid" class="review-grid"></div></div>
+</section>
+
+<section id="maps" class="page-section hidden section-bg-maps">
+  <div class="container"><span class="eyebrow">LOCATION</span><h2>Find Us</h2><div class="map-card"><iframe title="Google Maps" src="https://www.google.com/maps?q=Bhubaneswar,Odisha,India&output=embed" loading="lazy"></iframe></div><a class="primary inline" href="https://www.google.com/maps/search/?api=1&query=Bhubaneswar%20Odisha%20India" target="_blank" rel="noopener">Open Google Maps</a></div>
+</section>
+
+<section id="dashboard" class="page-section hidden section-bg-dashboard">
+  <div class="container"><span class="eyebrow">ACCOUNT</span><h2>Dashboard</h2><div id="dashboardStats" class="stats"></div><div class="dashboard-grid"><div><h3>My bookings</h3><div id="dashboardBookings"></div></div><div><h3>Food orders</h3><div id="dashboardOrders"></div></div></div></div>
+</section>
+</main>
+
+<footer><strong>Royal Grand Hotel</strong><span>Direct support: <a href="tel:+917894410792">7894410792</a></span><a href="https://wa.me/917894410792" target="_blank" rel="noopener">WhatsApp</a></footer>
+</div>
+
+<div id="modal" class="modal hidden"><div class="modal-card"><button id="closeModal" class="close">×</button><div id="modalContent"></div></div></div>
+<script src="script.js"></script>
+</body>
+</html>
